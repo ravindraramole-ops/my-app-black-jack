@@ -11,7 +11,7 @@
 - Main code implementation can be found in the following folder
 - src->component->black.js (React component)
 - src->component->black.test.js (Unit test cases)
-= build (code ready for deployment)
+- build (code ready for deployment)
 
 #Code deployment:
 - Repository can be cloned and built using the instruction in Readme.md
