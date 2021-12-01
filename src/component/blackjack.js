@@ -49,7 +49,7 @@ class Hand extends React.Component{
     renderHand(){
         const rows = [];
         for(let i=0; i<this.props.hand.length; i++) {
-            //initial dace down card for dealer
+            //initial face down card for dealer
             if(this.props.faceDownCard && i===1){
                 rows.push(<Card key={this.props.hand[i].notation+this.props.hand[i].suit} notation={this.props.hand[i].notation} suit={'face-down'} />);
             }else{
@@ -128,18 +128,16 @@ class Game extends React.Component {
             return;
         }
         //dealer auto play logic
-        let dealerHandVal = getHandValue(this.state.dealerHand);
+        let dealerHand = this.state.dealerHand.slice();
+        let dealerHandVal = getHandValue(dealerHand);
         //dealer stands on 17, no card added to dealer's hand after the hand value reaches or crosses 17
         while(dealerHandVal<17){
-            let dealerHand = this.state.dealerHand.slice();
-            let randomCard = getRandomCard(this.cards);
-            dealerHand.push(randomCard);
+            dealerHand.push(getRandomCard(this.cards));
             dealerHandVal = getHandValue(dealerHand);
-            this.setState({dealerHand: dealerHand, dealerHandValue: dealerHandVal});
         }
-        //compatring the player and dealer hand to get the game status
-        let gameStatus = compareHands({playerHand: this.state.playerHand, dealerHand: this.state.dealerHand});
-        this.setState({gameStatus: {status: gameStatus, playerMode:false}});
+        //comparing the player and dealer hand to get the game status
+        let gameStatus = compareHands({playerHand: this.state.playerHand, dealerHand: dealerHand});
+        this.setState({dealerHand: dealerHand, gameStatus: {status: gameStatus, playerMode:false}, dealerHandValue: dealerHandVal});
     }
 
     //Resetting the complete game status to initial state
@@ -258,7 +256,7 @@ function getRandomCard(cards){
     let len = cards.length;
     let randomIdx = Math.floor((Math.random()*1000)%len);
     let retObj = cards[randomIdx];
-    cards.splice(randomIdx, 1);
+    cards.splice(randomIdx, 1); //remove the card drawn from the deck
     return retObj;
 }
 
@@ -270,6 +268,7 @@ function getHandValue(handObj){
             numOfAces += 1;
         }
         handVal += handObj[i].value;
+        //if hand value goes over 21 considering the Ace value 11 then consider Ace value as 1
         if(handVal > 21 && numOfAces > 0){
             handVal -= numOfAces * 10;
             numOfAces -= 1
