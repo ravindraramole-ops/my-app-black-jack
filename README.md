@@ -9,11 +9,11 @@ In the project directory, you can run:
 ### `npm install -g serve`
 ### `serve -s build`
 
-If build folder is ready to be deployed. You may serve it with a static server (http://localhost:3000).\
+If build folder is ready to be deployed. You may serve it with a static server (http://localhost:3000).
 
 ### `npm install`
 
-Installs all the dependant node modules for the development environment.\
+Installs all the dependant node modules for the development environment.
 
 ### `npm start`
 
