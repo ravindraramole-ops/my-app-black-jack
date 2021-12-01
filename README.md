@@ -6,6 +6,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### 'npm install -g serve'
+### 'serve -s build'
+
+If build folder is ready to be deployed. You may serve it with a static server.
+
 ### `npm install`
 
 Installs all the dependant node modules for the development environment
@@ -13,8 +18,7 @@ Installs all the dependant node modules for the development environment
 ### `npm start`
 
 Runs the app in the development mode.\
-Command can be run in the build directory (Runs production code on localhost) or in the root directory (Runs the app in the development mode)
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+ [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
